@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     rajaongkir_api (0.1.0)
-      faraday
+      faraday (~> 1.0.0)
+      faraday_middleware (~> 1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -10,6 +11,8 @@ GEM
     diff-lcs (1.4.4)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     multipart-post (2.1.1)
     rake (12.3.3)
     rspec (3.9.0)
