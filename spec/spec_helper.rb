@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "rajaongkir_api"
+require "rajaongkir"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

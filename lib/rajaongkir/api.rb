@@ -4,6 +4,8 @@ require 'rajaongkir/response'
 
 module Rajaongkir
   class API
+    attr_accessor :api_key, :host, :type, :timeout, :open_timeout
+
     def initialize(api_key, opts)
       @api_key = api_key
       @host = opts[:host]
@@ -70,10 +72,13 @@ module Rajaongkir
       body.dig('rajaongkir')
     end
 
+
+    private
+
     def url
       case @type
       when 'pro'
-        'https://pro.rajaongkir.com/api/province'
+        'https://pro.rajaongkir.com/api'
       else
         "#{@host}/#{@type}"
       end
