@@ -6,6 +6,11 @@ module Rajaongkir
   class API
     attr_accessor :api_key, :host, :type, :timeout, :open_timeout
 
+    # api_key = API Key from RajaOngkir
+    # opts[:host] = Host of RajaOngkir
+    # opts[:type] = Account Type (starter/basic/pro)
+    # opts[:timeout] = Timeout, default 5s
+    # opts[:open_timeout] = Open Timeout, default 5s
     def initialize(api_key, opts)
       @api_key = api_key
       @host = opts[:host]
@@ -14,6 +19,11 @@ module Rajaongkir
       @open_timeout = opts[:open_timeout]
     end
 
+    # Retrieve provinces list from RajaOngkir
+    #
+    # Example:
+    # >> provinces = rajaongkir.province
+    # => <Rajaongkir::Response @results=[{"province_id"=>"1", "province"=>"Bali"}, {"province_id"=>"2", "province"=>"Bangka Belitung"}, {"province_id"=>"3", "province"=>"Banten"}]>
     def province(opts = {})
       payload = {
         id: opts[:province_id]
@@ -22,6 +32,12 @@ module Rajaongkir
       call(:get, 'province', payload)
     end
 
+
+    # Retrieve cities list from RajaOngkir
+    #
+    # Example:
+    # >> cities = rajaongkir.city
+    # => #<Rajaongkir::Response @results=[{"city_id"=>"1", "province_id"=>"21", "province"=>"Nanggroe Aceh Darussalam (NAD)", "type"=>"Kabupaten", "city_name"=>"Aceh Barat", "postal_code"=>"23681"}, {"city_id"=>"2", "province_id"=>"21", "province"=>"Nanggroe Aceh Darussalam (NAD)", "type"=>"Kabupaten", "city_name"=>"Aceh Barat Daya", "postal_code"=>"23764"}]>
     def city(opts = {})
       payload = {
         id: opts[:city_id],
@@ -31,6 +47,12 @@ module Rajaongkir
       call(:get, 'city', payload)
     end
 
+
+    # Retrieve cost from source city to destination city given weight and courier
+    #
+    # Example:
+    # >> cost = rajaongkir.cost(origin: 1, destination: 2, weight: 1, courier: 'jne')
+    # => #<Rajaongkir::Response @results=[{"code"=>"jne", "name"=>"Jalur Nugraha Ekakurir (JNE)", "costs"=>[{"service"=>"OKE", "description"=>"Ongkos Kirim Ekonomis", "cost"=>[{"value"=>18000, "etd"=>"4-6", "note"=>""}]}, {"service"=>"REG", "description"=>"Layanan Reguler", "cost"=>[{"value"=>20000, "etd"=>"2-3", "note"=>""}]}]}]>
     def cost(opts = {})
       payload = {
         origin: opts[:origin].to_s,
@@ -41,6 +63,8 @@ module Rajaongkir
 
       call(:post, 'cost', payload)
     end
+
+    private
 
     def call(method, path, payload)
       start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -71,9 +95,6 @@ module Rajaongkir
 
       body.dig('rajaongkir')
     end
-
-
-    private
 
     def url
       case @type
