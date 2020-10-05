@@ -8,15 +8,15 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Rajaongkir.com API wrapper for Ruby}
   spec.description   = %q{Rajaongkir.com API wrapper for Ruby}
-  spec.homepage      = "https://github.com/jsavigny/rajaongkir_api"
+  spec.homepage      = "https://rubygems.org/gems/rajaongkir_api"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
-  spec.metadata["allowed_push_host"] = "https://github.com/jsavigny"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/jsavigny/rajaongkir_api"
-  spec.metadata["changelog_uri"] = "https://github.com/jsavigny"
+  spec.metadata["changelog_uri"] = "https://github.com/jsavigny/rajaongkir_api"
 
   spec.add_dependency 'faraday', '~> 1.0.0'
   spec.add_dependency 'faraday_middleware', '~> 1.0.0'
